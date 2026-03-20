@@ -18,7 +18,7 @@ body {
 /* Main Card */
 .container {
   backdrop-filter: blur(15px);
-  background: rgba(126, 102, 204, 0.511);
+  background: rgba(90, 69, 160, 0.397);
   border-radius: 20px;
   padding: 30px;
   width: 400px;
@@ -33,7 +33,7 @@ body {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  border: 3px solid #a291e5;
+  border: 3px solid #bfb2f4;
   margin-bottom: 15px;
   transition: 0.3s;
 }
@@ -57,7 +57,7 @@ p {
 .links a {
   margin: 10px;
   text-decoration: none;
-  color: #a291e5;
+  color: #38bdf8;
   font-weight: bold;
   transition: 0.3s;
 }
@@ -80,7 +80,7 @@ h2 {
 }
 
 .card {
-  background: rgba(222, 230, 81, 0.917);
+  background: rgba(255, 255, 255, 0.08);
   padding: 15px;
   border-radius: 12px;
   transition: 0.3s;
@@ -88,7 +88,7 @@ h2 {
 
 .card:hover {
   transform: translateY(-5px) scale(1.02);
-  background: rgba(222, 230, 81, 0.917);
+  background: rgba(81, 42, 149, 0.231);
 }
 
 /* Button */
@@ -96,7 +96,7 @@ h2 {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
-  background: #a291e5;
+  background: #38bdf8;
   color: black;
   border-radius: 8px;
   text-decoration: none;
