@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="page-title">My Portfolio</title>
+  <title>Aheli Datta — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -21,120 +21,224 @@
   <div class="blob blob-3"></div>
   <div class="blob blob-4"></div>
 
-  <!-- ===================== EDITOR PANEL ===================== -->
-  <div id="editor-panel">
-    <div id="editor-header">
-      <span class="editor-title">✦ Portfolio Studio</span>
-      <button id="preview-btn" onclick="generatePortfolio()">Preview →</button>
+  <!-- ===================== NAV ===================== -->
+  <nav id="nav">
+    <div class="nav-name">Aheli Datta</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
     </div>
+  </nav>
 
-    <div id="editor-body">
+  <!-- ===================== HERO ===================== -->
+  <section id="about" class="hero-section">
+    <div class="hero-inner">
 
-      <div class="section-group">
-        <div class="group-label">Hero</div>
-        <input class="field" id="e-name" type="text" placeholder="Your name" value="Aheli Datta" />
-        <input class="field" id="e-role" type="text" placeholder="Your role / tagline" value="B.Tech Student" />
-        <textarea class="field" id="e-bio" placeholder="Short bio (2-3 sentences)" rows="3">I craft delightful digital experiences at the intersection of design and code. Currently building beautiful things for the web.</textarea>
-        <input class="field" id="e-avatar" type="text" placeholder="Avatar initials (e.g. AT)" value="AD" />
-        <input class="field" id="e-accent" type="color" value="#f9a8d4" title="Accent colour" />
-      </div>
-
-      <div class="section-group">
-        <div class="group-label">Skills</div>
-        <input class="field" id="e-skills" type="text" placeholder="Comma-separated skills" value="Figma, React, CSS, Motion Design, Branding" />
-      </div>
-
-      <div class="section-group">
-        <div class="group-label">Projects</div>
-        <div id="projects-list"></div>
-        <button class="add-btn" onclick="addProject()">+ Add project</button>
-      </div>
-
-      <div class="section-group">
-        <div class="group-label">Contact</div>
-        <input class="field" id="e-email" type="text" placeholder="Email" value="hello@aikotanaka.io" />
-        <input class="field" id="e-github" type="text" placeholder="GitHub URL" value="https://github.com/" />
-        <input class="field" id="e-linkedin" type="text" placeholder="LinkedIn URL" value="https://linkedin.com/in/" />
-      </div>
-
-      <button class="gen-btn" onclick="generatePortfolio()">✦ Generate Portfolio</button>
-    </div>
-  </div>
-
-  <!-- ===================== PORTFOLIO OUTPUT ===================== -->
-  <div id="portfolio">
-
-    <!-- NAV -->
-    <nav id="nav">
-      <div class="nav-name" id="nav-name">Aiko Tanaka</div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <button class="nav-edit-btn" onclick="toggleEditor()">✦ Edit</button>
-    </nav>
-
-    <!-- HERO -->
-    <section id="about" class="hero-section">
-      <div class="hero-inner">
-        <div class="hero-left reveal">
-          <div class="hero-tag">Available for work</div>
-          <h1 class="hero-name" id="p-name">Aiko Tanaka</h1>
-          <p class="hero-role" id="p-role">UI Designer & Creative Developer</p>
-          <p class="hero-bio" id="p-bio">I craft delightful digital experiences at the intersection of design and code. Currently building beautiful things for the web.</p>
-          <div class="hero-btns">
-            <a href="#work" class="btn-primary">See my work</a>
-            <a href="#contact" class="btn-ghost">Say hello</a>
-          </div>
+      <div class="hero-left reveal">
+        <div class="hero-tag">Open to internships</div>
+        <h1 class="hero-name">Aheli Datta</h1>
+        <p class="hero-role">B.Tech CSE Student</p>
+        <p class="hero-bio">
+          I am a second-year B.Tech Computer Science student with a strong foundation in programming and web development. Passionate about building real-world projects and seeking internship opportunities to apply technical skills and gain industry experience.
+        </p>
+        <div class="hero-btns">
+          <a href="#work" class="btn-primary">See my work</a>
+          <a href="#contact" class="btn-ghost">Say hello</a>
         </div>
-        <div class="hero-right reveal" style="animation-delay:.2s">
+      </div>
+
+      <div class="hero-right reveal" style="animation-delay:.2s">
+        <!-- Photo upload area -->
+        <div class="avatar-wrap" id="avatar-wrap" onclick="document.getElementById('photo-input').click()">
           <div class="avatar-ring">
-            <div class="avatar" id="p-avatar">AT</div>
+            <div class="avatar" id="p-avatar">
+              <!-- Shows image if uploaded, else initials -->
+              <span id="avatar-initials">AD</span>
+              <img id="avatar-img" src="" alt="Aheli Datta" style="display:none;" />
+            </div>
           </div>
-          <div class="float-badge badge-1">✦ Creative</div>
-          <div class="float-badge badge-2">♡ Passionate</div>
-          <div class="float-badge badge-3">⚡ Fast</div>
+          <div class="upload-hint" id="upload-hint">
+            <span class="upload-icon">📷</span>
+            <span>Click to upload photo</span>
+          </div>
+          <input type="file" id="photo-input" accept="image/*" style="display:none;" onchange="handlePhoto(event)" />
+        </div>
+        <div class="float-badge badge-1">✦ Creative</div>
+        <div class="float-badge badge-2">♡ Passionate</div>
+        <div class="float-badge badge-3">⚡ Fast Learner</div>
+      </div>
+
+    </div>
+    <div class="scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills" class="section">
+    <div class="section-inner">
+      <div class="section-label reveal">What I know</div>
+      <h2 class="section-title reveal">Skills &amp; Tools</h2>
+      <div class="skills-categories reveal">
+
+        <div class="skill-cat">
+          <div class="skill-cat-label">Languages</div>
+          <div class="skills-grid">
+            <span class="skill-pill pill-pink">Python</span>
+            <span class="skill-pill pill-lav">Java</span>
+            <span class="skill-pill pill-sky">C</span>
+            <span class="skill-pill pill-mint">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-label">Web Development</div>
+          <div class="skills-grid">
+            <span class="skill-pill pill-peach">HTML</span>
+            <span class="skill-pill pill-rose">CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-label">Tools &amp; Platforms</div>
+          <div class="skills-grid">
+            <span class="skill-pill pill-pink">Git</span>
+            <span class="skill-pill pill-lav">GitHub</span>
+            <span class="skill-pill pill-sky">VS Code</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-label">Concepts</div>
+          <div class="skills-grid">
+            <span class="skill-pill pill-mint">Data Structures</span>
+            <span class="skill-pill pill-peach">Problem Solving</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="work" class="section section-alt">
+    <div class="section-inner">
+      <div class="section-label reveal">Selected work</div>
+      <h2 class="section-title reveal">Projects</h2>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <span class="card-emoji">🌐</span>
+          <div class="card-title">Portfolio Website</div>
+          <div class="card-desc">
+            Developed a responsive personal portfolio using HTML, CSS, and JavaScript. Deployed using Vercel and integrated GitHub for version control.
+          </div>
+          <div class="card-tags">
+            <span class="card-tag">HTML</span>
+            <span class="card-tag">CSS</span>
+            <span class="card-tag">JavaScript</span>
+            <span class="card-tag">Vercel</span>
+            <span class="card-tag">GitHub</span>
+          </div>
+          <a href="https://github.com/" target="_blank" class="card-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card reveal" style="animation-delay:.1s">
+          <span class="card-emoji">🎮</span>
+          <div class="card-title">Number Duel Game</div>
+          <div class="card-desc">
+            A slick dark-themed arcade number guessing game — You vs the Computer. Both sides pick a secret number (1–1000). Take turns guessing each other's number. First one to guess correctly wins.
+          </div>
+          <div class="card-tags">
+            <span class="card-tag">HTML</span>
+            <span class="card-tag">CSS</span>
+            <span class="card-tag">JavaScript</span>
+            <span class="card-tag">Game Dev</span>
+          </div>
+          <a href="https://github.com/" target="_blank" class="card-link">View on GitHub →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION & CERTIFICATIONS ===================== -->
+  <section id="education" class="section">
+    <div class="section-inner">
+      <div class="section-label reveal">Background</div>
+      <h2 class="section-title reveal">Education &amp; Certifications</h2>
+      <div class="edu-grid">
+
+        <div class="edu-card reveal">
+          <div class="edu-icon">🎓</div>
+          <div class="edu-body">
+            <div class="edu-school">D.Y. Patil International University</div>
+            <div class="edu-degree">Bachelor of Technology — Computer Science Engineering</div>
+            <div class="edu-meta">2024 – 2028 &nbsp;·&nbsp; Second Year</div>
+          </div>
+        </div>
+
+        <div class="edu-card reveal" style="animation-delay:.1s">
+          <div class="edu-icon">🏅</div>
+          <div class="edu-body">
+            <div class="edu-school">Coursera — University of Rochester</div>
+            <div class="edu-degree">Technology Commercialisation</div>
+            <div class="edu-meta">Certification</div>
+          </div>
+        </div>
+
+        <div class="edu-card reveal" style="animation-delay:.2s">
+          <div class="edu-icon">🏅</div>
+          <div class="edu-body">
+            <div class="edu-school">Coursera — University of Michigan</div>
+            <div class="edu-degree">Data Mining in Python</div>
+            <div class="edu-meta">Certification</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXTRAS ===================== -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-label reveal">Currently</div>
+      <h2 class="section-title reveal">Extras</h2>
+      <div class="extras-list reveal">
+        <div class="extra-item">
+          <span class="extra-dot"></span>
+          Actively learning <strong>Full Stack Development</strong>
+        </div>
+        <div class="extra-item">
+          <span class="extra-dot"></span>
+          Interested in building real-world applications
         </div>
       </div>
-      <div class="scroll-hint">scroll ↓</div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section">
-      <div class="section-inner">
-        <div class="section-label reveal">What I do</div>
-        <h2 class="section-title reveal">Skills &amp; Tools</h2>
-        <div class="skills-grid" id="p-skills"></div>
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="section">
+    <div class="section-inner contact-inner">
+      <div class="section-label reveal">Get in touch</div>
+      <h2 class="section-title reveal">Let's work together</h2>
+      <p class="contact-sub reveal">Have a project or internship opportunity? I'd love to hear from you.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:ahelidatta3@gmail.com" class="contact-link">✉ ahelidatta3@gmail.com</a>
+        <a href="tel:8010546666" class="contact-link">📞 8010546666</a>
+        <a href="https://www.linkedin.com/in/aheli-datta-75a01524b" target="_blank" class="contact-link">☞ LinkedIn</a>
+        <a href="https://www.github.com/Aheli-03" target="_blank" class="contact-link">☞ GitHub</a>
+        <div class="contact-link addr">📍 Balewadi High Street, Pune</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="work" class="section section-alt">
-      <div class="section-inner">
-        <div class="section-label reveal">Selected work</div>
-        <h2 class="section-title reveal">Projects</h2>
-        <div class="projects-grid" id="p-projects"></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <div class="section-inner contact-inner">
-        <div class="section-label reveal">Get in touch</div>
-        <h2 class="section-title reveal">Let's work together</h2>
-        <p class="contact-sub reveal" id="p-contact-sub">Have a project in mind? I'd love to hear about it.</p>
-        <div class="contact-links reveal" id="p-contact-links"></div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <span id="p-footer-name">Aiko Tanaka</span> · Crafted with ♡
-    </footer>
-
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    Aheli Datta · B.Tech CSE · Crafted with ♡
+  </footer>
 
   <script src="script.js"></script>
 </body>
