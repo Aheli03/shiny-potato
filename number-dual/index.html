@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Duel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SETUP SCREEN -->
+  <div id="screen-setup" class="screen active">
+    <div class="hero-badge">1 vs 1</div>
+    <h1 class="logo">NUMBER<br><span class="logo-accent">DUEL</span></h1>
+    <p class="tagline">Pick a secret. Crack theirs. Win the duel.</p>
+    <div class="setup-box">
+      <label class="field-label">Your secret number</label>
+      <div class="field-hint">Choose any number from 1 to 1000</div>
+      <input type="number" id="userSecret" min="1" max="1000" placeholder="???" class="big-input" />
+      <div id="setupError" class="error-msg" style="display:none"></div>
+      <button class="cta-btn" onclick="startGame()">
+        &#9876; &nbsp;Start Duel
+      </button>
+    </div>
+    <div class="rules-strip">
+      <div class="rule"><span class="rule-num">01</span>Both pick a secret</div>
+      <div class="rule-sep">&#8594;</div>
+      <div class="rule"><span class="rule-num">02</span>Take turns guessing</div>
+      <div class="rule-sep">&#8594;</div>
+      <div class="rule"><span class="rule-num">03</span>First to crack it wins</div>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="screen-game" class="screen">
+    <div class="duel-header">
+      <div class="player-score" id="playerSide">
+        <div class="player-label">YOU</div>
+        <div class="player-guesses" id="userGuessCount">0</div>
+        <div class="player-sub">guesses</div>
+      </div>
+      <div class="vs-center">
+        <div class="vs-text">VS</div>
+        <div class="turn-dot" id="turnDot"></div>
+      </div>
+      <div class="player-score cpu-score" id="cpuSide">
+        <div class="player-label">CPU</div>
+        <div class="player-guesses" id="cpuGuessCount">0</div>
+        <div class="player-sub">guesses</div>
+      </div>
+    </div>
+
+    <div class="turn-bar" id="turnBar">
+      <div class="turn-pip you-pip"></div>
+      <span id="turnText">Your turn — guess the CPU's number</span>
+    </div>
+
+    <div class="log-wrap">
+      <div class="log-header">Match log</div>
+      <div class="game-log" id="gameLog"></div>
+    </div>
+
+    <div class="action-panel" id="userPanel">
+      <div class="panel-label">Range: <span class="range-val" id="rangeDisplay">1 – 1000</span></div>
+      <div class="guess-row">
+        <input type="number" id="userGuessInput" min="1" max="1000" placeholder="Enter your guess..." class="guess-input" />
+        <button class="fire-btn" onclick="submitUserGuess()">Fire &#10148;</button>
+      </div>
+      <div id="guessError" class="error-msg" style="display:none"></div>
+    </div>
+
+    <div class="action-panel hidden" id="cpuPanel">
+      <div class="cpu-guess-display">
+        <span class="cpu-guess-label">CPU guesses</span>
+        <span class="cpu-guess-num" id="cpuGuessNum">—</span>
+      </div>
+      <div class="cpu-range-hint" id="cpuRangeHint"></div>
+      <div class="hint-row">
+        <button class="hint-btn lower" onclick="giveHint('lower')">
+          <div class="hint-arrow">&#8595;</div>
+          <div>Too high</div>
+        </button>
+        <button class="hint-btn correct" onclick="giveHint('correct')">
+          <div class="hint-arrow">&#10003;</div>
+          <div>Correct!</div>
+        </button>
+        <button class="hint-btn higher" onclick="giveHint('higher')">
+          <div class="hint-arrow">&#8593;</div>
+          <div>Too low</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="screen-result" class="screen">
+    <div class="result-crown" id="resultCrown"></div>
+    <div class="result-headline" id="resultHeadline"></div>
+    <div class="result-flavor" id="resultFlavor"></div>
+    <div class="result-stats" id="resultStats"></div>
+    <button class="cta-btn" onclick="resetGame()">&#8635; &nbsp;Play Again</button>
+  </div>
+
+  <canvas id="fx"></canvas>
+  <script src="game.js"></script>
+</body>
+</html>
