@@ -1,87 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aheli's Portfolio</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">My Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<div class="container">
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
 
-  <!-- HERO -->
-  <img src="images/profile.jpg" class="profile" alt="Profile">
-  <h1>Hello, I'm Aheli Datta 👋</h1>
-  <p>Aspiring Full Stack Developer</p>
+  <!-- Floating background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
 
-  <div class="links">
-    <a href="https://github.com/Aheli03" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/aheli-datta-75a01524b" target="_blank">LinkedIn</a>
+  <!-- ===================== EDITOR PANEL ===================== -->
+  <div id="editor-panel">
+    <div id="editor-header">
+      <span class="editor-title">✦ Portfolio Studio</span>
+      <button id="preview-btn" onclick="generatePortfolio()">Preview →</button>
+    </div>
+
+    <div id="editor-body">
+
+      <div class="section-group">
+        <div class="group-label">Hero</div>
+        <input class="field" id="e-name" type="text" placeholder="Your name" value="Aheli Datta" />
+        <input class="field" id="e-role" type="text" placeholder="Your role / tagline" value="B.Tech Student" />
+        <textarea class="field" id="e-bio" placeholder="Short bio (2-3 sentences)" rows="3">I craft delightful digital experiences at the intersection of design and code. Currently building beautiful things for the web.</textarea>
+        <input class="field" id="e-avatar" type="text" placeholder="Avatar initials (e.g. AT)" value="AD" />
+        <input class="field" id="e-accent" type="color" value="#f9a8d4" title="Accent colour" />
+      </div>
+
+      <div class="section-group">
+        <div class="group-label">Skills</div>
+        <input class="field" id="e-skills" type="text" placeholder="Comma-separated skills" value="Figma, React, CSS, Motion Design, Branding" />
+      </div>
+
+      <div class="section-group">
+        <div class="group-label">Projects</div>
+        <div id="projects-list"></div>
+        <button class="add-btn" onclick="addProject()">+ Add project</button>
+      </div>
+
+      <div class="section-group">
+        <div class="group-label">Contact</div>
+        <input class="field" id="e-email" type="text" placeholder="Email" value="hello@aikotanaka.io" />
+        <input class="field" id="e-github" type="text" placeholder="GitHub URL" value="https://github.com/" />
+        <input class="field" id="e-linkedin" type="text" placeholder="LinkedIn URL" value="https://linkedin.com/in/" />
+      </div>
+
+      <button class="gen-btn" onclick="generatePortfolio()">✦ Generate Portfolio</button>
+    </div>
   </div>
 
-  <!-- ABOUT -->
-  <h2>About Me</h2>
-  <p>
-    I am a passionate engineering student learning full stack development.
-    I enjoy building real-world projects and improving my coding skills.
-  </p>
+  <!-- ===================== PORTFOLIO OUTPUT ===================== -->
+  <div id="portfolio">
 
-  <!-- SKILLS -->
-  <h2>Skills</h2>
+    <!-- NAV -->
+    <nav id="nav">
+      <div class="nav-name" id="nav-name">Aiko Tanaka</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="nav-edit-btn" onclick="toggleEditor()">✦ Edit</button>
+    </nav>
 
-  <div class="skills">
-    <div class="skill">
-      <p>HTML</p>
-      <div class="bar"><div class="fill" style="width:90%"></div></div>
-    </div>
+    <!-- HERO -->
+    <section id="about" class="hero-section">
+      <div class="hero-inner">
+        <div class="hero-left reveal">
+          <div class="hero-tag">Available for work</div>
+          <h1 class="hero-name" id="p-name">Aiko Tanaka</h1>
+          <p class="hero-role" id="p-role">UI Designer & Creative Developer</p>
+          <p class="hero-bio" id="p-bio">I craft delightful digital experiences at the intersection of design and code. Currently building beautiful things for the web.</p>
+          <div class="hero-btns">
+            <a href="#work" class="btn-primary">See my work</a>
+            <a href="#contact" class="btn-ghost">Say hello</a>
+          </div>
+        </div>
+        <div class="hero-right reveal" style="animation-delay:.2s">
+          <div class="avatar-ring">
+            <div class="avatar" id="p-avatar">AT</div>
+          </div>
+          <div class="float-badge badge-1">✦ Creative</div>
+          <div class="float-badge badge-2">♡ Passionate</div>
+          <div class="float-badge badge-3">⚡ Fast</div>
+        </div>
+      </div>
+      <div class="scroll-hint">scroll ↓</div>
+    </section>
 
-    <div class="skill">
-      <p>CSS</p>
-      <div class="bar"><div class="fill" style="width:80%"></div></div>
-    </div>
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="section-inner">
+        <div class="section-label reveal">What I do</div>
+        <h2 class="section-title reveal">Skills &amp; Tools</h2>
+        <div class="skills-grid" id="p-skills"></div>
+      </div>
+    </section>
 
-    <div class="skill">
-      <p>JavaScript</p>
-      <div class="bar"><div class="fill" style="width:70%"></div></div>
-    </div>
+    <!-- PROJECTS -->
+    <section id="work" class="section section-alt">
+      <div class="section-inner">
+        <div class="section-label reveal">Selected work</div>
+        <h2 class="section-title reveal">Projects</h2>
+        <div class="projects-grid" id="p-projects"></div>
+      </div>
+    </section>
 
-    <div class="skill">
-      <p>Python</p>
-      <div class="bar"><div class="fill" style="width:75%"></div></div>
-    </div>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-inner contact-inner">
+        <div class="section-label reveal">Get in touch</div>
+        <h2 class="section-title reveal">Let's work together</h2>
+        <p class="contact-sub reveal" id="p-contact-sub">Have a project in mind? I'd love to hear about it.</p>
+        <div class="contact-links reveal" id="p-contact-links"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span id="p-footer-name">Aiko Tanaka</span> · Crafted with ♡
+    </footer>
+
   </div>
 
-  <!-- PROJECTS -->
-  <h2>Projects</h2>
-
-  <div class="projects">
-
-    <div class="card">
-      <h3>Portfolio Website</h3>
-      <p>Responsive personal portfolio using HTML, CSS, JavaScript</p>
-      <a href="#" target="_blank">View Project</a>
-    </div>
-
-    <div class="card">
-      <h3>Chat Application</h3>
-      <p>Real-time messaging app using Node.js & Socket.io (in progress)</p>
-    </div>
-
-  </div>
-
-  <!-- RESUME -->
-  <a href="resume.pdf" class="btn">Download Resume</a>
-  <!-- CONTACT -->
-  <h2>Contact</h2>
-  <p>Email: ahelidatta3@gmail.com</p>
-
-</div>
+  <script src="script.js"></script>
 </body>
 </html>
